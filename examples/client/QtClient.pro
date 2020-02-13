@@ -28,6 +28,8 @@ HEADERS += \
         proto/gen.grpc.pb.h \
         qtest1.h
 
+include(proto-qt/qt.pri)
+
 RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
