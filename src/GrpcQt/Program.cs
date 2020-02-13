@@ -17,7 +17,7 @@ namespace GrpcQt
                     Thread.Sleep(1000);
                 }
                 Debugger.Break();
-
+                
                 using (var stdin = Console.OpenStandardInput())
                 using (var stdout = Console.OpenStandardOutput())
                 {
