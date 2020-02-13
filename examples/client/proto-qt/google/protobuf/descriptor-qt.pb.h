@@ -153,7 +153,6 @@ class QFileOptions : public QObject
 	Q_PROPERTY(QString javaPackage READ getJavaPackage WRITE setJavaPackage)
 	Q_PROPERTY(QString javaOuterClassname READ getJavaOuterClassname WRITE setJavaOuterClassname)
 	Q_PROPERTY(bool javaMultipleFiles READ getJavaMultipleFiles WRITE setJavaMultipleFiles)
-	Q_PROPERTY(bool javaGenerateEqualsAndHash READ getJavaGenerateEqualsAndHash WRITE setJavaGenerateEqualsAndHash)
 	Q_PROPERTY(bool javaStringCheckUtf8 READ getJavaStringCheckUtf8 WRITE setJavaStringCheckUtf8)
 	Q_PROPERTY(QString goPackage READ getGoPackage WRITE setGoPackage)
 	Q_PROPERTY(bool ccGenericServices READ getCcGenericServices WRITE setCcGenericServices)
@@ -178,8 +177,6 @@ public:
 	QString getJavaOuterClassname();
 	void setJavaMultipleFiles(bool val);
 	bool getJavaMultipleFiles();
-	void setJavaGenerateEqualsAndHash(bool val);
-	bool getJavaGenerateEqualsAndHash();
 	void setJavaStringCheckUtf8(bool val);
 	bool getJavaStringCheckUtf8();
 	void setGoPackage(QString val);

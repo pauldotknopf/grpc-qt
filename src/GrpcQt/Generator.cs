@@ -17,6 +17,7 @@ namespace GrpcQt
         {
             var response = new CodeGeneratorResponse();
 
+            var fileModels = new List<FileModel>();
             foreach (var fileDescriptorProto in request.ProtoFile)
             {
                 var fileName = fileDescriptorProto.Name;
@@ -31,6 +32,7 @@ namespace GrpcQt
                     implCode = BuildContent(implWriter =>
                     {
                         var fileModel = ModelBuilder.BuildModel(fileDescriptorProto);
+                        fileModels.Add(fileModel);
                         GenerateFile(fileModel, headerWriter, implWriter);
                     });
                 });
@@ -54,20 +56,10 @@ namespace GrpcQt
                 
                 var headerFiles = new List<string>();
                 var sourceFiles = new List<string>();
-                foreach (var file in response.File)
-                {
-                    Log.Logger.Information(file.Name);
-                    if (file.Name.EndsWith("-qt.pb.h"))
-                    {
-                        headerFiles.Add(file.Name);
-                    }
-
-                    if (file.Name.EndsWith("-qt.pb.cpp"))
-                    {
-                        sourceFiles.Add(file.Name);
-                    }
-                }
-
+                
+                headerFiles.AddRange(fileModels.Select(x => x.IncludeFile));
+                sourceFiles.AddRange(fileModels.Select(x => x.ImplFile));
+              
                 writer.WriteLine("HEADERS += \\");
                 using (writer.Indent())
                 {
@@ -200,21 +192,6 @@ namespace GrpcQt
             public string Getter { get; set; }
             
             public string Setter { get; set; }
-        }
-
-        private static string GetCppTypeName(string packageName, DescriptorProto descriptorProto)
-        {
-            // // Convert this/is/a/file/name to this::is::a::file::Name
-            // var segments = fileName.Split("/").Select(x => x.ToLower()).ToList();
-            // segments[^1] = segments[^1].ApplyCase(LetterCasing.Title);
-            // var result = string.Join("::", segments);
-
-            if (string.IsNullOrEmpty(packageName))
-            {
-                return descriptorProto.Name;
-            }
-
-            return packageName.Replace(".", "::") + "::" + descriptorProto.Name;
         }
     }
 }

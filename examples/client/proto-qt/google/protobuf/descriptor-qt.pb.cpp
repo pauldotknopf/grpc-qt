@@ -189,15 +189,19 @@ QString QMethodDescriptorProto::getOutputType()
 }
 void QMethodDescriptorProto::setClientStreaming(bool val)
 {
+	_message->set_client_streaming(val);
 }
 bool QMethodDescriptorProto::getClientStreaming()
 {
+	return _message->client_streaming();
 }
 void QMethodDescriptorProto::setServerStreaming(bool val)
 {
+	_message->set_server_streaming(val);
 }
 bool QMethodDescriptorProto::getServerStreaming()
 {
+	return _message->server_streaming();
 }
 QFileOptions::QFileOptions() : _message(new google::protobuf::FileOptions())
 {
@@ -223,21 +227,19 @@ QString QFileOptions::getJavaOuterClassname()
 }
 void QFileOptions::setJavaMultipleFiles(bool val)
 {
+	_message->set_java_multiple_files(val);
 }
 bool QFileOptions::getJavaMultipleFiles()
 {
-}
-void QFileOptions::setJavaGenerateEqualsAndHash(bool val)
-{
-}
-bool QFileOptions::getJavaGenerateEqualsAndHash()
-{
+	return _message->java_multiple_files();
 }
 void QFileOptions::setJavaStringCheckUtf8(bool val)
 {
+	_message->set_java_string_check_utf8(val);
 }
 bool QFileOptions::getJavaStringCheckUtf8()
 {
+	return _message->java_string_check_utf8();
 }
 void QFileOptions::setGoPackage(QString val)
 {
@@ -249,39 +251,51 @@ QString QFileOptions::getGoPackage()
 }
 void QFileOptions::setCcGenericServices(bool val)
 {
+	_message->set_cc_generic_services(val);
 }
 bool QFileOptions::getCcGenericServices()
 {
+	return _message->cc_generic_services();
 }
 void QFileOptions::setJavaGenericServices(bool val)
 {
+	_message->set_java_generic_services(val);
 }
 bool QFileOptions::getJavaGenericServices()
 {
+	return _message->java_generic_services();
 }
 void QFileOptions::setPyGenericServices(bool val)
 {
+	_message->set_py_generic_services(val);
 }
 bool QFileOptions::getPyGenericServices()
 {
+	return _message->py_generic_services();
 }
 void QFileOptions::setPhpGenericServices(bool val)
 {
+	_message->set_php_generic_services(val);
 }
 bool QFileOptions::getPhpGenericServices()
 {
+	return _message->php_generic_services();
 }
 void QFileOptions::setDeprecated(bool val)
 {
+	_message->set_deprecated(val);
 }
 bool QFileOptions::getDeprecated()
 {
+	return _message->deprecated();
 }
 void QFileOptions::setCcEnableArenas(bool val)
 {
+	_message->set_cc_enable_arenas(val);
 }
 bool QFileOptions::getCcEnableArenas()
 {
+	return _message->cc_enable_arenas();
 }
 void QFileOptions::setObjcClassPrefix(QString val)
 {
@@ -347,27 +361,35 @@ QMessageOptions::~QMessageOptions()
 }
 void QMessageOptions::setMessageSetWireFormat(bool val)
 {
+	_message->set_message_set_wire_format(val);
 }
 bool QMessageOptions::getMessageSetWireFormat()
 {
+	return _message->message_set_wire_format();
 }
 void QMessageOptions::setNoStandardDescriptorAccessor(bool val)
 {
+	_message->set_no_standard_descriptor_accessor(val);
 }
 bool QMessageOptions::getNoStandardDescriptorAccessor()
 {
+	return _message->no_standard_descriptor_accessor();
 }
 void QMessageOptions::setDeprecated(bool val)
 {
+	_message->set_deprecated(val);
 }
 bool QMessageOptions::getDeprecated()
 {
+	return _message->deprecated();
 }
 void QMessageOptions::setMapEntry(bool val)
 {
+	_message->set_map_entry(val);
 }
 bool QMessageOptions::getMapEntry()
 {
+	return _message->map_entry();
 }
 QFieldOptions::QFieldOptions() : _message(new google::protobuf::FieldOptions())
 {
@@ -377,27 +399,35 @@ QFieldOptions::~QFieldOptions()
 }
 void QFieldOptions::setPacked(bool val)
 {
+	_message->set_packed(val);
 }
 bool QFieldOptions::getPacked()
 {
+	return _message->packed();
 }
 void QFieldOptions::setLazy(bool val)
 {
+	_message->set_lazy(val);
 }
 bool QFieldOptions::getLazy()
 {
+	return _message->lazy();
 }
 void QFieldOptions::setDeprecated(bool val)
 {
+	_message->set_deprecated(val);
 }
 bool QFieldOptions::getDeprecated()
 {
+	return _message->deprecated();
 }
 void QFieldOptions::setWeak(bool val)
 {
+	_message->set_weak(val);
 }
 bool QFieldOptions::getWeak()
 {
+	return _message->weak();
 }
 QOneofOptions::QOneofOptions() : _message(new google::protobuf::OneofOptions())
 {
@@ -413,15 +443,19 @@ QEnumOptions::~QEnumOptions()
 }
 void QEnumOptions::setAllowAlias(bool val)
 {
+	_message->set_allow_alias(val);
 }
 bool QEnumOptions::getAllowAlias()
 {
+	return _message->allow_alias();
 }
 void QEnumOptions::setDeprecated(bool val)
 {
+	_message->set_deprecated(val);
 }
 bool QEnumOptions::getDeprecated()
 {
+	return _message->deprecated();
 }
 QEnumValueOptions::QEnumValueOptions() : _message(new google::protobuf::EnumValueOptions())
 {
@@ -431,9 +465,11 @@ QEnumValueOptions::~QEnumValueOptions()
 }
 void QEnumValueOptions::setDeprecated(bool val)
 {
+	_message->set_deprecated(val);
 }
 bool QEnumValueOptions::getDeprecated()
 {
+	return _message->deprecated();
 }
 QServiceOptions::QServiceOptions() : _message(new google::protobuf::ServiceOptions())
 {
@@ -443,9 +479,11 @@ QServiceOptions::~QServiceOptions()
 }
 void QServiceOptions::setDeprecated(bool val)
 {
+	_message->set_deprecated(val);
 }
 bool QServiceOptions::getDeprecated()
 {
+	return _message->deprecated();
 }
 QMethodOptions::QMethodOptions() : _message(new google::protobuf::MethodOptions())
 {
@@ -455,9 +493,11 @@ QMethodOptions::~QMethodOptions()
 }
 void QMethodOptions::setDeprecated(bool val)
 {
+	_message->set_deprecated(val);
 }
 bool QMethodOptions::getDeprecated()
 {
+	return _message->deprecated();
 }
 QUninterpretedOption::QUninterpretedOption() : _message(new google::protobuf::UninterpretedOption())
 {

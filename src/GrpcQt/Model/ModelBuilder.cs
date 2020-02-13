@@ -1,3 +1,4 @@
+using System;
 using Google.Protobuf.Reflection;
 using Humanizer;
 
@@ -42,6 +43,11 @@ namespace GrpcQt.Model
                 foreach (var field in messageDescriptorProto.Field)
                 {
                     if (field.Label.HasFlag(FieldDescriptorProto.Types.Label.Repeated))
+                    {
+                        continue;
+                    }
+
+                    if (field.Options != null && field.Options.Deprecated)
                     {
                         continue;
                     }

@@ -45,6 +45,9 @@ namespace GrpcQt.Model
                     case FieldDescriptorProto.Types.Type.String:
                         writer.WriteLine($"_message->set_{FieldDescriptorProto.Name}(val.toStdString());");
                         break;
+                    case FieldDescriptorProto.Types.Type.Bool:
+                        writer.WriteLine($"_message->set_{FieldDescriptorProto.Name}(val);");
+                        break;
                 }
             }
             writer.WriteLine("}");
@@ -56,6 +59,9 @@ namespace GrpcQt.Model
                 {
                     case FieldDescriptorProto.Types.Type.String:
                         writer.WriteLine($"return QString::fromStdString(_message->{FieldDescriptorProto.Name}());");
+                        break;
+                    case FieldDescriptorProto.Types.Type.Bool:
+                        writer.WriteLine($"return _message->{FieldDescriptorProto.Name}();");
                         break;
                 }
             }
