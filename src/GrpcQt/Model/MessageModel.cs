@@ -8,7 +8,7 @@ namespace GrpcQt.Model
         
         public string ProtobufTypeName { get; set; }
         
-        public List<PropertyModel> Properties { get; set; } = new List<PropertyModel>();
+        public List<PropertyModel> Properties { get; } = new List<PropertyModel>();
 
         public void WriteCtorDeclarations(CodeWriter writer)
         {

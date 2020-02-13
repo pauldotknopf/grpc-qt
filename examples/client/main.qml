@@ -10,9 +10,8 @@ ApplicationWindow {
     title: qsTr("Stack")
 
     Component.onCompleted: {
-        var t = Qt.createComponent("QTestMessageRequest")
-        var o = t.createObject();
-        console.log(t);
+        var e = TypesCreator.createTestMessageRequest();
+        console.log(e);
     }
 
 //    Test1 {

@@ -20,36 +20,68 @@ namespace GrpcQt
             var fileModels = new List<FileModel>();
             foreach (var fileDescriptorProto in request.ProtoFile)
             {
-                var fileName = fileDescriptorProto.Name;
-                while (fileName.EndsWith(".proto"))
-                {
-                    fileName = fileName.Substring(0, fileName.Length - 6);
-                }
-
+                FileModel fileModel = null;
                 var implCode = "";
                 var headerCode = BuildContent(headerWriter =>
                 {
                     implCode = BuildContent(implWriter =>
                     {
-                        var fileModel = ModelBuilder.BuildModel(fileDescriptorProto);
-                        fileModels.Add(fileModel);
+                        fileModel = ModelBuilder.BuildModel(fileDescriptorProto);
                         GenerateFile(fileModel, headerWriter, implWriter);
                     });
                 });
                 
+                fileModels.Add(fileModel);
+                
                 response.File.Add(new CodeGeneratorResponse.Types.File
                 {
-                    Name = fileName + "-qt.pb.h",
+                    Name = fileModel.IncludeFile,
                     Content = headerCode
                 });
                 
                 response.File.Add(new CodeGeneratorResponse.Types.File
                 {
-                    Name = fileName + "-qt.pb.cpp",
+                    Name = fileModel.ImplFile,
                     Content = implCode
                 });
             }
 
+            var additionalHeaders = new List<string>();
+            foreach (var fileModel in fileModels)
+            {
+                var headerContent = BuildContent(header =>
+                {
+                    header.WriteLine($"#ifndef {fileModel.HeaderPragmaName}_CREATOR");
+                    header.WriteLine($"#define {fileModel.HeaderPragmaName}_CREATOR");
+                    header.WriteLine("#include <QObject>");
+                    header.WriteLine($"#include \"{fileModel.IncludeFile}\"");
+                    header.WriteLine($"class {fileModel.CreatorTypeName} : public QObject {{");
+                    header.WriteLineIndented("Q_OBJECT");
+                    header.WriteLine("public:");
+                    using (header.Indent())
+                    {
+                        header.WriteLine($"{fileModel.CreatorTypeName}(QObject* parent = nullptr) : QObject(parent)");
+                        header.WriteLine("{");
+                        header.WriteLine("}");
+                        foreach (var message in fileModel.Messages)
+                        {
+                            header.WriteLine($"Q_INVOKABLE {message.TypeName}* create{message.TypeName.Substring(1)}()");
+                            header.WriteLine("{");
+                            header.WriteLineIndented($"return new {message.TypeName}();");
+                            header.WriteLine("}");
+                        }
+                    }
+                    header.WriteLine("};");
+                    header.WriteLine($"#endif // {fileModel.HeaderPragmaName}_CREATOR");
+                });
+                response.File.Add(new CodeGeneratorResponse.Types.File
+                {
+                    Name = fileModel.FileNameBase + "-qt-creator.pb.h",
+                    Content = headerContent
+                });
+                additionalHeaders.Add(fileModel.FileNameBase + "-qt-creator.pb.h");
+            }
+            
             var pri = BuildContent(writer =>
             {
                 writer.WriteLine("INCLUDEPATH += $$PWD");
@@ -58,6 +90,7 @@ namespace GrpcQt
                 var sourceFiles = new List<string>();
                 
                 headerFiles.AddRange(fileModels.Select(x => x.IncludeFile));
+                headerFiles.AddRange(additionalHeaders);
                 sourceFiles.AddRange(fileModels.Select(x => x.ImplFile));
               
                 writer.WriteLine("HEADERS += \\");
@@ -95,7 +128,6 @@ namespace GrpcQt
             header.WriteLine("#include <QSharedPointer>");
 
             impl.WriteLine($"#include \"{fileModel.IncludeFile}\"");
-            // Include the C++ generated protobuf types.
             header.WriteLine($"#include \"{fileModel.ProtoIncludeFile}\"");
             
             foreach (var messageModel in fileModel.Messages)
@@ -149,49 +181,6 @@ namespace GrpcQt
                     return streamReader.ReadToEnd();
                 }
             }
-        }
-
-        private static PropertyInfo BuildPropertyInfo(FieldDescriptorProto field)
-        {
-            if(field.Label.HasFlag(FieldDescriptorProto.Types.Label.Repeated))
-            {
-                return null;
-            }
-            
-            var qType = "";
-            switch (field.Type)
-            {
-                case FieldDescriptorProto.Types.Type.String:
-                    qType = "QString";
-                    break;
-                case FieldDescriptorProto.Types.Type.Bool:
-                    qType = "bool";
-                    break;
-                default:
-                    return null;
-            }
-
-            return new PropertyInfo
-            {
-                ProtoField = field,
-                QType = qType,
-                PropertyName = field.Name.Replace("_", " ").Camelize(),
-                Getter = $"get{field.Name.Replace("_", " ").Pascalize()}",
-                Setter = $"set{field.Name.Replace("_", " ").Pascalize()}"
-            };
-        }
-        
-        private class PropertyInfo
-        {
-            public FieldDescriptorProto ProtoField { get; set; }
-            
-            public string QType { get; set; }
-            
-            public string PropertyName { get; set; }
-            
-            public string Getter { get; set; }
-            
-            public string Setter { get; set; }
         }
     }
 }

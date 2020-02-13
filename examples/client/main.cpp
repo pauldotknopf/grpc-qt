@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <qtest1.h>
 #include <types-qt.pb.h>
+#include <types-qt-creator.pb.h>
 
 int main(int argc, char *argv[])
 {
@@ -14,6 +15,13 @@ int main(int argc, char *argv[])
     qmlRegisterType<QTest1>("interop", 1, 0, "Test1");
     qmlRegisterType<QTestMessageRequest>("interop", 1, 0, "QTestMessageRequest");
     qmlRegisterType<QTestMessageResponse>("interop", 1, 0, "QTestMessageResponse");
+
+    qmlRegisterSingletonType<QTypesCreator>("interop", 1, 0, "TypesCreator", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+
+        return new QTypesCreator();
+    });
 
     QTestMessageRequest request;
 

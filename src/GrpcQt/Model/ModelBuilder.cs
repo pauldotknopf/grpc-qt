@@ -1,6 +1,9 @@
 using System;
+using System.Diagnostics;
+using System.Threading;
 using Google.Protobuf.Reflection;
 using Humanizer;
+using Serilog;
 
 namespace GrpcQt.Model
 {
@@ -11,6 +14,8 @@ namespace GrpcQt.Model
             var result = new FileModel();
             result.HeaderPragmaName = $"{fileDescriptorProto.Name.ToUpper().Replace(".", "").Replace("/", "_")}_H";
 
+            Log.Warning(fileDescriptorProto.Name);
+            
             {
                 var fileName = fileDescriptorProto.Name;
                 while (fileName.EndsWith(".proto"))
@@ -20,6 +25,7 @@ namespace GrpcQt.Model
                 result.FileNameBase = fileName;
             }
 
+            result.CreatorTypeName = $"Q{result.FileNameBase.Replace("/", " ").ApplyCase(LetterCasing.Title).Replace(" ", "")}Creator";
             result.IncludeFile = result.FileNameBase + "-qt.pb.h";
             result.ImplFile = result.FileNameBase + "-qt.pb.cpp";
             result.ProtoIncludeFile = result.FileNameBase + ".pb.h";
