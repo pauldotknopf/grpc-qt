@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <qtest1.h>
+#include <types-qt.pb.h>
 
 int main(int argc, char *argv[])
 {
@@ -11,6 +12,8 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     qmlRegisterType<QTest1>("interop", 1, 0, "Test1");
+    qmlRegisterType<QTestMessageRequest>("interop", 1, 0, "Test1");
+    qmlRegisterType<QTestMessageResponse>("interop", 1, 0, "Test1");
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
