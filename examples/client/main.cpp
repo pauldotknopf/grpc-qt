@@ -12,8 +12,10 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     qmlRegisterType<QTest1>("interop", 1, 0, "Test1");
-    qmlRegisterType<QTestMessageRequest>("interop", 1, 0, "Test1");
-    qmlRegisterType<QTestMessageResponse>("interop", 1, 0, "Test1");
+    qmlRegisterType<QTestMessageRequest>("interop", 1, 0, "QTestMessageRequest");
+    qmlRegisterType<QTestMessageResponse>("interop", 1, 0, "QTestMessageResponse");
+
+    QTestMessageRequest request;
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

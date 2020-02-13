@@ -15,6 +15,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 PKGCONFIG += grpc++ protobuf
 
+INCLUDEPATH += $$PWD/proto
+
 SOURCES += \
         main.cpp \
         proto/types.pb.cc \
