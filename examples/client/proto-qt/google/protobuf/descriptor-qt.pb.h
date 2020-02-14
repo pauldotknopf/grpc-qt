@@ -3,6 +3,8 @@
 #include <QObject>
 #include <QSharedPointer>
 #include "google/protobuf/descriptor.pb.h"
+namespace google {
+namespace protobuf {
 class QFileDescriptorSet : public QObject
 {
 	Q_OBJECT
@@ -345,4 +347,6 @@ public:
 private:
 	QSharedPointer<google::protobuf::GeneratedCodeInfo> _message;
 };
+}
+}
 #endif // GOOGLE_PROTOBUF_DESCRIPTORPROTO_H

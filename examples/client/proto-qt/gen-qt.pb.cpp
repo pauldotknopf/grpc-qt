@@ -1,4 +1,5 @@
 #include "gen-qt.pb.h"
+using namespace Tests;
 QTest1ListenEventStream::QTest1ListenEventStream() : _message(new Tests::Test1ListenEventStream())
 {
 }

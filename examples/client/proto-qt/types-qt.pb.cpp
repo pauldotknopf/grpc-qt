@@ -1,4 +1,5 @@
 #include "types-qt.pb.h"
+using namespace custom::types;
 QTestMessageRequest::QTestMessageRequest() : _message(new custom::types::TestMessageRequest())
 {
 }

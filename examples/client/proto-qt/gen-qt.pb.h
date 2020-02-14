@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QSharedPointer>
 #include "gen.pb.h"
+namespace Tests {
 class QTest1ListenEventStream : public QObject
 {
 	Q_OBJECT
@@ -228,4 +229,5 @@ public:
 private:
 	QSharedPointer<Tests::Test1TestMethodNoRequestMethodResponse> _message;
 };
+}
 #endif // GENPROTO_H

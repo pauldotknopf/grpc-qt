@@ -3,6 +3,8 @@
 #include <QObject>
 #include <QSharedPointer>
 #include "types.pb.h"
+namespace custom {
+namespace types {
 class QTestMessageRequest : public QObject
 {
 	Q_OBJECT
@@ -27,4 +29,6 @@ public:
 private:
 	QSharedPointer<custom::types::TestMessageResponse> _message;
 };
+}
+}
 #endif // TYPESPROTO_H

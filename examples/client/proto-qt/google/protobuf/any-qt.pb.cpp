@@ -1,4 +1,5 @@
 #include "google/protobuf/any-qt.pb.h"
+using namespace google::protobuf;
 QAny::QAny() : _message(new google::protobuf::Any())
 {
 }

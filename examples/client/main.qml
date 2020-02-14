@@ -10,27 +10,5 @@ ApplicationWindow {
     title: qsTr("Stack")
 
     Component.onCompleted: {
-        var e = TypesCreator.createTestMessageRequest();
-        console.log(e);
     }
-
-//    Test1 {
-//        id: test1
-
-//        Component.onCompleted: {
-
-
-
-////            console.log(new Date().getMilliseconds());
-////            console.log("value1: " + test1.propString);
-////             console.log(new Date().getMilliseconds());
-////            test1.propString = "sdfsdf";
-////             console.log(new Date().getMilliseconds());
-////            console.log("value2: " + test1.propString);
-////             console.log(new Date().getMilliseconds());
-////            test1.method(sdfsdf, function(res) {
-
-////            })
-//        }
-//    }
 }

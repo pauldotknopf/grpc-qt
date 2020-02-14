@@ -2,6 +2,8 @@
 #define TYPESPROTO_H_CREATOR
 #include <QObject>
 #include "types-qt.pb.h"
+namespace custom {
+namespace types {
 class QTypesCreator : public QObject {
 	Q_OBJECT
 public:
@@ -17,4 +19,6 @@ public:
 		return new QTestMessageResponse();
 	}
 };
+}
+}
 #endif // TYPESPROTO_H_CREATOR

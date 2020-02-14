@@ -25,6 +25,11 @@ namespace GrpcQt.Model
                 result.FileNameBase = fileName;
             }
 
+            if (!string.IsNullOrEmpty(fileDescriptorProto.Package))
+            {
+                result.Namespace = fileDescriptorProto.Package.Replace(".", "::");
+                result.NamespaceComponents.AddRange(fileDescriptorProto.Package.Split("."));
+            }
             result.CreatorTypeName = $"Q{result.FileNameBase.Replace("/", " ").ApplyCase(LetterCasing.Title).Replace(" ", "")}Creator";
             result.IncludeFile = result.FileNameBase + "-qt.pb.h";
             result.ImplFile = result.FileNameBase + "-qt.pb.cpp";

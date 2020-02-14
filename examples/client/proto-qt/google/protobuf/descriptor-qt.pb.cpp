@@ -1,4 +1,5 @@
 #include "google/protobuf/descriptor-qt.pb.h"
+using namespace google::protobuf;
 QFileDescriptorSet::QFileDescriptorSet() : _message(new google::protobuf::FileDescriptorSet())
 {
 }

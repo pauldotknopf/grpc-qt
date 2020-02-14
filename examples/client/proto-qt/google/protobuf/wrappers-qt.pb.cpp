@@ -1,4 +1,5 @@
 #include "google/protobuf/wrappers-qt.pb.h"
+using namespace google::protobuf;
 QDoubleValue::QDoubleValue() : _message(new google::protobuf::DoubleValue())
 {
 }

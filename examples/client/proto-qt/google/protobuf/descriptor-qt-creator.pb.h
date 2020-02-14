@@ -2,6 +2,8 @@
 #define GOOGLE_PROTOBUF_DESCRIPTORPROTO_H_CREATOR
 #include <QObject>
 #include "google/protobuf/descriptor-qt.pb.h"
+namespace google {
+namespace protobuf {
 class QGoogleProtobufDescriptorCreator : public QObject {
 	Q_OBJECT
 public:
@@ -93,4 +95,6 @@ public:
 		return new QGeneratedCodeInfo();
 	}
 };
+}
+}
 #endif // GOOGLE_PROTOBUF_DESCRIPTORPROTO_H_CREATOR

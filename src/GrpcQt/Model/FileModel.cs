@@ -4,6 +4,10 @@ namespace GrpcQt.Model
 {
     public class FileModel
     {
+        public string Namespace { get; set; }
+        
+        public List<string> NamespaceComponents { get; } = new List<string>();
+        
         public string CreatorTypeName { get; set; }
         
         public string HeaderPragmaName { get; set; }

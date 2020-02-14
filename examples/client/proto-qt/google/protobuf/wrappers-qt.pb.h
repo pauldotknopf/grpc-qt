@@ -3,6 +3,8 @@
 #include <QObject>
 #include <QSharedPointer>
 #include "google/protobuf/wrappers.pb.h"
+namespace google {
+namespace protobuf {
 class QDoubleValue : public QObject
 {
 	Q_OBJECT
@@ -90,4 +92,6 @@ public:
 private:
 	QSharedPointer<google::protobuf::BytesValue> _message;
 };
+}
+}
 #endif // GOOGLE_PROTOBUF_WRAPPERSPROTO_H

@@ -2,6 +2,7 @@
 #define GENPROTO_H_CREATOR
 #include <QObject>
 #include "gen-qt.pb.h"
+namespace Tests {
 class QGenCreator : public QObject {
 	Q_OBJECT
 public:
@@ -109,4 +110,5 @@ public:
 		return new QTest1TestMethodNoRequestMethodResponse();
 	}
 };
+}
 #endif // GENPROTO_H_CREATOR

@@ -2,6 +2,8 @@
 #define GOOGLE_PROTOBUF_WRAPPERSPROTO_H_CREATOR
 #include <QObject>
 #include "google/protobuf/wrappers-qt.pb.h"
+namespace google {
+namespace protobuf {
 class QGoogleProtobufWrappersCreator : public QObject {
 	Q_OBJECT
 public:
@@ -45,4 +47,6 @@ public:
 		return new QBytesValue();
 	}
 };
+}
+}
 #endif // GOOGLE_PROTOBUF_WRAPPERSPROTO_H_CREATOR

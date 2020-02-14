@@ -55,6 +55,12 @@ namespace GrpcQt
                     header.WriteLine($"#define {fileModel.HeaderPragmaName}_CREATOR");
                     header.WriteLine("#include <QObject>");
                     header.WriteLine($"#include \"{fileModel.IncludeFile}\"");
+
+                    foreach (var nameSpace in fileModel.NamespaceComponents)
+                    {
+                        header.WriteLine($"namespace {nameSpace} {{");
+                    }
+                    
                     header.WriteLine($"class {fileModel.CreatorTypeName} : public QObject {{");
                     header.WriteLineIndented("Q_OBJECT");
                     header.WriteLine("public:");
@@ -72,6 +78,12 @@ namespace GrpcQt
                         }
                     }
                     header.WriteLine("};");
+                    
+                    foreach (var _ in fileModel.NamespaceComponents)
+                    {
+                        header.WriteLine("}");
+                    }
+                    
                     header.WriteLine($"#endif // {fileModel.HeaderPragmaName}_CREATOR");
                 });
                 response.File.Add(new CodeGeneratorResponse.Types.File
@@ -130,6 +142,16 @@ namespace GrpcQt
             impl.WriteLine($"#include \"{fileModel.IncludeFile}\"");
             header.WriteLine($"#include \"{fileModel.ProtoIncludeFile}\"");
             
+            foreach (var nameSpace in fileModel.NamespaceComponents)
+            {
+                header.WriteLine($"namespace {nameSpace} {{");
+            }
+
+            if (!string.IsNullOrEmpty(fileModel.Namespace))
+            {
+                impl.WriteLine($"using namespace {fileModel.Namespace};");
+            }
+            
             foreach (var messageModel in fileModel.Messages)
             {
                 header.WriteLine($"class {messageModel.TypeName} : public QObject");
@@ -160,6 +182,11 @@ namespace GrpcQt
                 }
                 
                 header.WriteLine("};");
+            }
+            
+            foreach (var _ in fileModel.NamespaceComponents)
+            {
+                header.WriteLine("}");
             }
             
             header.WriteLine($"#endif // {fileModel.HeaderPragmaName}");

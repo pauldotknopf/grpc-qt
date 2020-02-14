@@ -3,6 +3,8 @@
 #include <QObject>
 #include <QSharedPointer>
 #include "google/protobuf/any.pb.h"
+namespace google {
+namespace protobuf {
 class QAny : public QObject
 {
 	Q_OBJECT
@@ -15,4 +17,6 @@ public:
 private:
 	QSharedPointer<google::protobuf::Any> _message;
 };
+}
+}
 #endif // GOOGLE_PROTOBUF_ANYPROTO_H
