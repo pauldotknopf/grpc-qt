@@ -31,6 +31,8 @@ namespace GrpcQt.Model
         
         public string Setter => $"set{FieldDescriptorProto.Name.Replace("_", " ").Pascalize()}";
         
+        public string Filler => $"fill{FieldDescriptorProto.Name.Replace("_", " ").Pascalize()}";
+        
         public void WriteHeaderMetaDeclaration(CodeWriter writer)
         {
             using (writer.Indent())
@@ -44,7 +46,7 @@ namespace GrpcQt.Model
                         writer.WriteLine($"Q_PROPERTY(QString {Name} READ {Getter} WRITE {Setter})");
                         break;
                     case FieldDescriptorProto.Types.Type.Message:
-                        writer.WriteLine($"Q_PROPERTY({ReferencedMessageModel.CppTypeNameFullyQualified} {Name} READ {Getter} WRITE {Setter})");
+                        // Message properties aren't exposed as actual properties.
                         break;
                     default:
                         throw new NotSupportedException($"Invalid type: {FieldDescriptorProto.Type}");
@@ -67,7 +69,9 @@ namespace GrpcQt.Model
                         writer.WriteLine($"QString {Getter}();");
                         break;
                     case FieldDescriptorProto.Types.Type.Message:
-                        writer.WriteLine("SDFSD");
+                        writer.WriteLine($"Q_INVOKABLE void {Filler}();");
+                        writer.WriteLine($"Q_INVOKABLE void {Setter}({ReferencedMessageModel.CppTypeNameFullyQualified}* val);");
+                        writer.WriteLine($"Q_INVOKABLE {ReferencedMessageModel.CppTypeNameFullyQualified}* {Getter}();");
                         break;
                     default:
                         throw new NotSupportedException($"Invalid type: {FieldDescriptorProto.Type}");
@@ -98,6 +102,30 @@ namespace GrpcQt.Model
                     writer.WriteLine($"QString {MessageModel.CppTypeName}::{Getter}()");
                     writer.WriteLine("{");
                     writer.WriteLineIndented($"return QString::fromStdString(_message->{FieldDescriptorProto.Name}());");
+                    writer.WriteLine("}");
+                    break;
+                case FieldDescriptorProto.Types.Type.Message:
+                    writer.WriteLine($"void {MessageModel.CppTypeName}::{Filler}()");
+                    writer.WriteLine("{");
+                    writer.WriteLineIndented($"_message->set_allocated_{FieldDescriptorProto.Name}(new {ReferencedMessageModel.ProtobufTypeNameFullyQualified}());");
+                    writer.WriteLine("}");
+                    writer.WriteLine($"void {MessageModel.CppTypeName}::{Setter}({ReferencedMessageModel.CppTypeNameFullyQualified}* val)");
+                    writer.WriteLine("{");
+                    using (writer.Indent())
+                    {
+                        writer.WriteLine($"if (val) {{ _message->set_allocated_{FieldDescriptorProto.Name}(val->getInnerMessage()); }} else {{ _message->clear_{FieldDescriptorProto.Name}(); }}");
+                    }
+                    writer.WriteLine("}");
+                    writer.WriteLine($"{ReferencedMessageModel.CppTypeNameFullyQualified}* {MessageModel.CppTypeName}::{Getter}()");
+                    writer.WriteLine("{");
+                    using (writer.Indent())
+                    {
+                        writer.WriteLine($"if(!_message->has_{FieldDescriptorProto.Name}()) {{ return nullptr; }}");
+                        writer.WriteLine($"auto val = _message->{FieldDescriptorProto.Name}();");
+                        writer.WriteLine($"auto result = new {ReferencedMessageModel.ProtobufTypeNameFullyQualified}();");
+                        writer.WriteLine("result->CopyFrom(val);");
+                        writer.WriteLine($"return new {ReferencedMessageModel.CppTypeNameFullyQualified}(QSharedPointer<{ReferencedMessageModel.ProtobufTypeNameFullyQualified}>(result));");
+                    }
                     writer.WriteLine("}");
                     break;
             }

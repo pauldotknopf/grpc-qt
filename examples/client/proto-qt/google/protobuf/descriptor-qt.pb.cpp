@@ -3,10 +3,16 @@ using namespace google::protobuf;
 QFileDescriptorSet::QFileDescriptorSet() : _message(new google::protobuf::FileDescriptorSet())
 {
 }
+QFileDescriptorSet::QFileDescriptorSet(QSharedPointer<google::protobuf::FileDescriptorSet> message) : _message(message)
+{
+}
 QFileDescriptorSet::~QFileDescriptorSet()
 {
 }
 QFileDescriptorProto::QFileDescriptorProto() : _message(new google::protobuf::FileDescriptorProto())
+{
+}
+QFileDescriptorProto::QFileDescriptorProto(QSharedPointer<google::protobuf::FileDescriptorProto> message) : _message(message)
 {
 }
 QFileDescriptorProto::~QFileDescriptorProto()
@@ -28,6 +34,38 @@ QString QFileDescriptorProto::getPackage()
 {
 	return QString::fromStdString(_message->package());
 }
+void QFileDescriptorProto::fillOptions()
+{
+	_message->set_allocated_options(new google::protobuf::FileOptions());
+}
+void QFileDescriptorProto::setOptions(google::protobuf::QFileOptions* val)
+{
+	if (val) { _message->set_allocated_options(val->getInnerMessage()); } else { _message->clear_options(); }
+}
+google::protobuf::QFileOptions* QFileDescriptorProto::getOptions()
+{
+	if(!_message->has_options()) { return nullptr; }
+	auto val = _message->options();
+	auto result = new google::protobuf::FileOptions();
+	result->CopyFrom(val);
+	return new google::protobuf::QFileOptions(QSharedPointer<google::protobuf::FileOptions>(result));
+}
+void QFileDescriptorProto::fillSourceCodeInfo()
+{
+	_message->set_allocated_source_code_info(new google::protobuf::SourceCodeInfo());
+}
+void QFileDescriptorProto::setSourceCodeInfo(google::protobuf::QSourceCodeInfo* val)
+{
+	if (val) { _message->set_allocated_source_code_info(val->getInnerMessage()); } else { _message->clear_source_code_info(); }
+}
+google::protobuf::QSourceCodeInfo* QFileDescriptorProto::getSourceCodeInfo()
+{
+	if(!_message->has_source_code_info()) { return nullptr; }
+	auto val = _message->source_code_info();
+	auto result = new google::protobuf::SourceCodeInfo();
+	result->CopyFrom(val);
+	return new google::protobuf::QSourceCodeInfo(QSharedPointer<google::protobuf::SourceCodeInfo>(result));
+}
 void QFileDescriptorProto::setSyntax(QString val)
 {
 	_message->set_syntax(val.toStdString());
@@ -37,6 +75,9 @@ QString QFileDescriptorProto::getSyntax()
 	return QString::fromStdString(_message->syntax());
 }
 QDescriptorProto::QDescriptorProto() : _message(new google::protobuf::DescriptorProto())
+{
+}
+QDescriptorProto::QDescriptorProto(QSharedPointer<google::protobuf::DescriptorProto> message) : _message(message)
 {
 }
 QDescriptorProto::~QDescriptorProto()
@@ -50,13 +91,35 @@ QString QDescriptorProto::getName()
 {
 	return QString::fromStdString(_message->name());
 }
+void QDescriptorProto::fillOptions()
+{
+	_message->set_allocated_options(new google::protobuf::MessageOptions());
+}
+void QDescriptorProto::setOptions(google::protobuf::QMessageOptions* val)
+{
+	if (val) { _message->set_allocated_options(val->getInnerMessage()); } else { _message->clear_options(); }
+}
+google::protobuf::QMessageOptions* QDescriptorProto::getOptions()
+{
+	if(!_message->has_options()) { return nullptr; }
+	auto val = _message->options();
+	auto result = new google::protobuf::MessageOptions();
+	result->CopyFrom(val);
+	return new google::protobuf::QMessageOptions(QSharedPointer<google::protobuf::MessageOptions>(result));
+}
 QExtensionRangeOptions::QExtensionRangeOptions() : _message(new google::protobuf::ExtensionRangeOptions())
+{
+}
+QExtensionRangeOptions::QExtensionRangeOptions(QSharedPointer<google::protobuf::ExtensionRangeOptions> message) : _message(message)
 {
 }
 QExtensionRangeOptions::~QExtensionRangeOptions()
 {
 }
 QFieldDescriptorProto::QFieldDescriptorProto() : _message(new google::protobuf::FieldDescriptorProto())
+{
+}
+QFieldDescriptorProto::QFieldDescriptorProto(QSharedPointer<google::protobuf::FieldDescriptorProto> message) : _message(message)
 {
 }
 QFieldDescriptorProto::~QFieldDescriptorProto()
@@ -102,7 +165,26 @@ QString QFieldDescriptorProto::getJsonName()
 {
 	return QString::fromStdString(_message->json_name());
 }
+void QFieldDescriptorProto::fillOptions()
+{
+	_message->set_allocated_options(new google::protobuf::FieldOptions());
+}
+void QFieldDescriptorProto::setOptions(google::protobuf::QFieldOptions* val)
+{
+	if (val) { _message->set_allocated_options(val->getInnerMessage()); } else { _message->clear_options(); }
+}
+google::protobuf::QFieldOptions* QFieldDescriptorProto::getOptions()
+{
+	if(!_message->has_options()) { return nullptr; }
+	auto val = _message->options();
+	auto result = new google::protobuf::FieldOptions();
+	result->CopyFrom(val);
+	return new google::protobuf::QFieldOptions(QSharedPointer<google::protobuf::FieldOptions>(result));
+}
 QOneofDescriptorProto::QOneofDescriptorProto() : _message(new google::protobuf::OneofDescriptorProto())
+{
+}
+QOneofDescriptorProto::QOneofDescriptorProto(QSharedPointer<google::protobuf::OneofDescriptorProto> message) : _message(message)
 {
 }
 QOneofDescriptorProto::~QOneofDescriptorProto()
@@ -116,7 +198,26 @@ QString QOneofDescriptorProto::getName()
 {
 	return QString::fromStdString(_message->name());
 }
+void QOneofDescriptorProto::fillOptions()
+{
+	_message->set_allocated_options(new google::protobuf::OneofOptions());
+}
+void QOneofDescriptorProto::setOptions(google::protobuf::QOneofOptions* val)
+{
+	if (val) { _message->set_allocated_options(val->getInnerMessage()); } else { _message->clear_options(); }
+}
+google::protobuf::QOneofOptions* QOneofDescriptorProto::getOptions()
+{
+	if(!_message->has_options()) { return nullptr; }
+	auto val = _message->options();
+	auto result = new google::protobuf::OneofOptions();
+	result->CopyFrom(val);
+	return new google::protobuf::QOneofOptions(QSharedPointer<google::protobuf::OneofOptions>(result));
+}
 QEnumDescriptorProto::QEnumDescriptorProto() : _message(new google::protobuf::EnumDescriptorProto())
+{
+}
+QEnumDescriptorProto::QEnumDescriptorProto(QSharedPointer<google::protobuf::EnumDescriptorProto> message) : _message(message)
 {
 }
 QEnumDescriptorProto::~QEnumDescriptorProto()
@@ -130,7 +231,26 @@ QString QEnumDescriptorProto::getName()
 {
 	return QString::fromStdString(_message->name());
 }
+void QEnumDescriptorProto::fillOptions()
+{
+	_message->set_allocated_options(new google::protobuf::EnumOptions());
+}
+void QEnumDescriptorProto::setOptions(google::protobuf::QEnumOptions* val)
+{
+	if (val) { _message->set_allocated_options(val->getInnerMessage()); } else { _message->clear_options(); }
+}
+google::protobuf::QEnumOptions* QEnumDescriptorProto::getOptions()
+{
+	if(!_message->has_options()) { return nullptr; }
+	auto val = _message->options();
+	auto result = new google::protobuf::EnumOptions();
+	result->CopyFrom(val);
+	return new google::protobuf::QEnumOptions(QSharedPointer<google::protobuf::EnumOptions>(result));
+}
 QEnumValueDescriptorProto::QEnumValueDescriptorProto() : _message(new google::protobuf::EnumValueDescriptorProto())
+{
+}
+QEnumValueDescriptorProto::QEnumValueDescriptorProto(QSharedPointer<google::protobuf::EnumValueDescriptorProto> message) : _message(message)
 {
 }
 QEnumValueDescriptorProto::~QEnumValueDescriptorProto()
@@ -144,7 +264,26 @@ QString QEnumValueDescriptorProto::getName()
 {
 	return QString::fromStdString(_message->name());
 }
+void QEnumValueDescriptorProto::fillOptions()
+{
+	_message->set_allocated_options(new google::protobuf::EnumValueOptions());
+}
+void QEnumValueDescriptorProto::setOptions(google::protobuf::QEnumValueOptions* val)
+{
+	if (val) { _message->set_allocated_options(val->getInnerMessage()); } else { _message->clear_options(); }
+}
+google::protobuf::QEnumValueOptions* QEnumValueDescriptorProto::getOptions()
+{
+	if(!_message->has_options()) { return nullptr; }
+	auto val = _message->options();
+	auto result = new google::protobuf::EnumValueOptions();
+	result->CopyFrom(val);
+	return new google::protobuf::QEnumValueOptions(QSharedPointer<google::protobuf::EnumValueOptions>(result));
+}
 QServiceDescriptorProto::QServiceDescriptorProto() : _message(new google::protobuf::ServiceDescriptorProto())
+{
+}
+QServiceDescriptorProto::QServiceDescriptorProto(QSharedPointer<google::protobuf::ServiceDescriptorProto> message) : _message(message)
 {
 }
 QServiceDescriptorProto::~QServiceDescriptorProto()
@@ -158,7 +297,26 @@ QString QServiceDescriptorProto::getName()
 {
 	return QString::fromStdString(_message->name());
 }
+void QServiceDescriptorProto::fillOptions()
+{
+	_message->set_allocated_options(new google::protobuf::ServiceOptions());
+}
+void QServiceDescriptorProto::setOptions(google::protobuf::QServiceOptions* val)
+{
+	if (val) { _message->set_allocated_options(val->getInnerMessage()); } else { _message->clear_options(); }
+}
+google::protobuf::QServiceOptions* QServiceDescriptorProto::getOptions()
+{
+	if(!_message->has_options()) { return nullptr; }
+	auto val = _message->options();
+	auto result = new google::protobuf::ServiceOptions();
+	result->CopyFrom(val);
+	return new google::protobuf::QServiceOptions(QSharedPointer<google::protobuf::ServiceOptions>(result));
+}
 QMethodDescriptorProto::QMethodDescriptorProto() : _message(new google::protobuf::MethodDescriptorProto())
+{
+}
+QMethodDescriptorProto::QMethodDescriptorProto(QSharedPointer<google::protobuf::MethodDescriptorProto> message) : _message(message)
 {
 }
 QMethodDescriptorProto::~QMethodDescriptorProto()
@@ -188,6 +346,22 @@ QString QMethodDescriptorProto::getOutputType()
 {
 	return QString::fromStdString(_message->output_type());
 }
+void QMethodDescriptorProto::fillOptions()
+{
+	_message->set_allocated_options(new google::protobuf::MethodOptions());
+}
+void QMethodDescriptorProto::setOptions(google::protobuf::QMethodOptions* val)
+{
+	if (val) { _message->set_allocated_options(val->getInnerMessage()); } else { _message->clear_options(); }
+}
+google::protobuf::QMethodOptions* QMethodDescriptorProto::getOptions()
+{
+	if(!_message->has_options()) { return nullptr; }
+	auto val = _message->options();
+	auto result = new google::protobuf::MethodOptions();
+	result->CopyFrom(val);
+	return new google::protobuf::QMethodOptions(QSharedPointer<google::protobuf::MethodOptions>(result));
+}
 void QMethodDescriptorProto::setClientStreaming(bool val)
 {
 	_message->set_client_streaming(val);
@@ -205,6 +379,9 @@ bool QMethodDescriptorProto::getServerStreaming()
 	return _message->server_streaming();
 }
 QFileOptions::QFileOptions() : _message(new google::protobuf::FileOptions())
+{
+}
+QFileOptions::QFileOptions(QSharedPointer<google::protobuf::FileOptions> message) : _message(message)
 {
 }
 QFileOptions::~QFileOptions()
@@ -357,6 +534,9 @@ QString QFileOptions::getRubyPackage()
 QMessageOptions::QMessageOptions() : _message(new google::protobuf::MessageOptions())
 {
 }
+QMessageOptions::QMessageOptions(QSharedPointer<google::protobuf::MessageOptions> message) : _message(message)
+{
+}
 QMessageOptions::~QMessageOptions()
 {
 }
@@ -393,6 +573,9 @@ bool QMessageOptions::getMapEntry()
 	return _message->map_entry();
 }
 QFieldOptions::QFieldOptions() : _message(new google::protobuf::FieldOptions())
+{
+}
+QFieldOptions::QFieldOptions(QSharedPointer<google::protobuf::FieldOptions> message) : _message(message)
 {
 }
 QFieldOptions::~QFieldOptions()
@@ -433,10 +616,16 @@ bool QFieldOptions::getWeak()
 QOneofOptions::QOneofOptions() : _message(new google::protobuf::OneofOptions())
 {
 }
+QOneofOptions::QOneofOptions(QSharedPointer<google::protobuf::OneofOptions> message) : _message(message)
+{
+}
 QOneofOptions::~QOneofOptions()
 {
 }
 QEnumOptions::QEnumOptions() : _message(new google::protobuf::EnumOptions())
+{
+}
+QEnumOptions::QEnumOptions(QSharedPointer<google::protobuf::EnumOptions> message) : _message(message)
 {
 }
 QEnumOptions::~QEnumOptions()
@@ -461,6 +650,9 @@ bool QEnumOptions::getDeprecated()
 QEnumValueOptions::QEnumValueOptions() : _message(new google::protobuf::EnumValueOptions())
 {
 }
+QEnumValueOptions::QEnumValueOptions(QSharedPointer<google::protobuf::EnumValueOptions> message) : _message(message)
+{
+}
 QEnumValueOptions::~QEnumValueOptions()
 {
 }
@@ -473,6 +665,9 @@ bool QEnumValueOptions::getDeprecated()
 	return _message->deprecated();
 }
 QServiceOptions::QServiceOptions() : _message(new google::protobuf::ServiceOptions())
+{
+}
+QServiceOptions::QServiceOptions(QSharedPointer<google::protobuf::ServiceOptions> message) : _message(message)
 {
 }
 QServiceOptions::~QServiceOptions()
@@ -489,6 +684,9 @@ bool QServiceOptions::getDeprecated()
 QMethodOptions::QMethodOptions() : _message(new google::protobuf::MethodOptions())
 {
 }
+QMethodOptions::QMethodOptions(QSharedPointer<google::protobuf::MethodOptions> message) : _message(message)
+{
+}
 QMethodOptions::~QMethodOptions()
 {
 }
@@ -501,6 +699,9 @@ bool QMethodOptions::getDeprecated()
 	return _message->deprecated();
 }
 QUninterpretedOption::QUninterpretedOption() : _message(new google::protobuf::UninterpretedOption())
+{
+}
+QUninterpretedOption::QUninterpretedOption(QSharedPointer<google::protobuf::UninterpretedOption> message) : _message(message)
 {
 }
 QUninterpretedOption::~QUninterpretedOption()
@@ -525,10 +726,16 @@ QString QUninterpretedOption::getAggregateValue()
 QSourceCodeInfo::QSourceCodeInfo() : _message(new google::protobuf::SourceCodeInfo())
 {
 }
+QSourceCodeInfo::QSourceCodeInfo(QSharedPointer<google::protobuf::SourceCodeInfo> message) : _message(message)
+{
+}
 QSourceCodeInfo::~QSourceCodeInfo()
 {
 }
 QGeneratedCodeInfo::QGeneratedCodeInfo() : _message(new google::protobuf::GeneratedCodeInfo())
+{
+}
+QGeneratedCodeInfo::QGeneratedCodeInfo(QSharedPointer<google::protobuf::GeneratedCodeInfo> message) : _message(message)
 {
 }
 QGeneratedCodeInfo::~QGeneratedCodeInfo()

@@ -1,6 +1,7 @@
 #ifndef TYPESPROTO_H_CREATOR
 #define TYPESPROTO_H_CREATOR
 #include <QObject>
+#include <QVariant>
 #include "types-qt.pb.h"
 namespace custom {
 namespace types {
@@ -10,13 +11,13 @@ public:
 	QTypesCreator(QObject* parent = nullptr) : QObject(parent)
 	{
 	}
-	Q_INVOKABLE QTestMessageRequest* createTestMessageRequest()
+	Q_INVOKABLE QVariant createTestMessageRequest()
 	{
-		return new QTestMessageRequest();
+		return QVariant::fromValue(new QTestMessageRequest());
 	}
-	Q_INVOKABLE QTestMessageResponse* createTestMessageResponse()
+	Q_INVOKABLE QVariant createTestMessageResponse()
 	{
-		return new QTestMessageResponse();
+		return QVariant::fromValue(new QTestMessageResponse());
 	}
 };
 }

@@ -1,6 +1,7 @@
 #ifndef GENPROTO_H_CREATOR
 #define GENPROTO_H_CREATOR
 #include <QObject>
+#include <QVariant>
 #include "gen-qt.pb.h"
 namespace Tests {
 class QGenCreator : public QObject {
@@ -9,105 +10,105 @@ public:
 	QGenCreator(QObject* parent = nullptr) : QObject(parent)
 	{
 	}
-	Q_INVOKABLE QTest1ListenEventStream* createTest1ListenEventStream()
+	Q_INVOKABLE QVariant createTest1ListenEventStream()
 	{
-		return new QTest1ListenEventStream();
+		return QVariant::fromValue(new QTest1ListenEventStream());
 	}
-	Q_INVOKABLE QTest1CreateResponse* createTest1CreateResponse()
+	Q_INVOKABLE QVariant createTest1CreateResponse()
 	{
-		return new QTest1CreateResponse();
+		return QVariant::fromValue(new QTest1CreateResponse());
 	}
-	Q_INVOKABLE QTest1StopRequest* createTest1StopRequest()
+	Q_INVOKABLE QVariant createTest1StopRequest()
 	{
-		return new QTest1StopRequest();
+		return QVariant::fromValue(new QTest1StopRequest());
 	}
-	Q_INVOKABLE QTest1StopResponse* createTest1StopResponse()
+	Q_INVOKABLE QVariant createTest1StopResponse()
 	{
-		return new QTest1StopResponse();
+		return QVariant::fromValue(new QTest1StopResponse());
 	}
-	Q_INVOKABLE QTest1PropStringSetRequest* createTest1PropStringSetRequest()
+	Q_INVOKABLE QVariant createTest1PropStringSetRequest()
 	{
-		return new QTest1PropStringSetRequest();
+		return QVariant::fromValue(new QTest1PropStringSetRequest());
 	}
-	Q_INVOKABLE QTest1PropStringSetResponse* createTest1PropStringSetResponse()
+	Q_INVOKABLE QVariant createTest1PropStringSetResponse()
 	{
-		return new QTest1PropStringSetResponse();
+		return QVariant::fromValue(new QTest1PropStringSetResponse());
 	}
-	Q_INVOKABLE QTest1PropStringGetRequest* createTest1PropStringGetRequest()
+	Q_INVOKABLE QVariant createTest1PropStringGetRequest()
 	{
-		return new QTest1PropStringGetRequest();
+		return QVariant::fromValue(new QTest1PropStringGetRequest());
 	}
-	Q_INVOKABLE QTest1PropStringGetResponse* createTest1PropStringGetResponse()
+	Q_INVOKABLE QVariant createTest1PropStringGetResponse()
 	{
-		return new QTest1PropStringGetResponse();
+		return QVariant::fromValue(new QTest1PropStringGetResponse());
 	}
-	Q_INVOKABLE QTest1PropStringPropertyChanged* createTest1PropStringPropertyChanged()
+	Q_INVOKABLE QVariant createTest1PropStringPropertyChanged()
 	{
-		return new QTest1PropStringPropertyChanged();
+		return QVariant::fromValue(new QTest1PropStringPropertyChanged());
 	}
-	Q_INVOKABLE QTest1PropComplexSetRequest* createTest1PropComplexSetRequest()
+	Q_INVOKABLE QVariant createTest1PropComplexSetRequest()
 	{
-		return new QTest1PropComplexSetRequest();
+		return QVariant::fromValue(new QTest1PropComplexSetRequest());
 	}
-	Q_INVOKABLE QTest1PropComplexSetResponse* createTest1PropComplexSetResponse()
+	Q_INVOKABLE QVariant createTest1PropComplexSetResponse()
 	{
-		return new QTest1PropComplexSetResponse();
+		return QVariant::fromValue(new QTest1PropComplexSetResponse());
 	}
-	Q_INVOKABLE QTest1PropComplexGetRequest* createTest1PropComplexGetRequest()
+	Q_INVOKABLE QVariant createTest1PropComplexGetRequest()
 	{
-		return new QTest1PropComplexGetRequest();
+		return QVariant::fromValue(new QTest1PropComplexGetRequest());
 	}
-	Q_INVOKABLE QTest1PropComplexGetResponse* createTest1PropComplexGetResponse()
+	Q_INVOKABLE QVariant createTest1PropComplexGetResponse()
 	{
-		return new QTest1PropComplexGetResponse();
+		return QVariant::fromValue(new QTest1PropComplexGetResponse());
 	}
-	Q_INVOKABLE QTest1PropComplexPropertyChanged* createTest1PropComplexPropertyChanged()
+	Q_INVOKABLE QVariant createTest1PropComplexPropertyChanged()
 	{
-		return new QTest1PropComplexPropertyChanged();
+		return QVariant::fromValue(new QTest1PropComplexPropertyChanged());
 	}
-	Q_INVOKABLE QTest1TestEventEvent* createTest1TestEventEvent()
+	Q_INVOKABLE QVariant createTest1TestEventEvent()
 	{
-		return new QTest1TestEventEvent();
+		return QVariant::fromValue(new QTest1TestEventEvent());
 	}
-	Q_INVOKABLE QTest1TestEventComplexEvent* createTest1TestEventComplexEvent()
+	Q_INVOKABLE QVariant createTest1TestEventComplexEvent()
 	{
-		return new QTest1TestEventComplexEvent();
+		return QVariant::fromValue(new QTest1TestEventComplexEvent());
 	}
-	Q_INVOKABLE QTest1TestEventNoDataEvent* createTest1TestEventNoDataEvent()
+	Q_INVOKABLE QVariant createTest1TestEventNoDataEvent()
 	{
-		return new QTest1TestEventNoDataEvent();
+		return QVariant::fromValue(new QTest1TestEventNoDataEvent());
 	}
-	Q_INVOKABLE QTest1TestMethodMethodRequest* createTest1TestMethodMethodRequest()
+	Q_INVOKABLE QVariant createTest1TestMethodMethodRequest()
 	{
-		return new QTest1TestMethodMethodRequest();
+		return QVariant::fromValue(new QTest1TestMethodMethodRequest());
 	}
-	Q_INVOKABLE QTest1TestMethodMethodResponse* createTest1TestMethodMethodResponse()
+	Q_INVOKABLE QVariant createTest1TestMethodMethodResponse()
 	{
-		return new QTest1TestMethodMethodResponse();
+		return QVariant::fromValue(new QTest1TestMethodMethodResponse());
 	}
-	Q_INVOKABLE QTest1TestMethodSyncMethodRequest* createTest1TestMethodSyncMethodRequest()
+	Q_INVOKABLE QVariant createTest1TestMethodSyncMethodRequest()
 	{
-		return new QTest1TestMethodSyncMethodRequest();
+		return QVariant::fromValue(new QTest1TestMethodSyncMethodRequest());
 	}
-	Q_INVOKABLE QTest1TestMethodSyncMethodResponse* createTest1TestMethodSyncMethodResponse()
+	Q_INVOKABLE QVariant createTest1TestMethodSyncMethodResponse()
 	{
-		return new QTest1TestMethodSyncMethodResponse();
+		return QVariant::fromValue(new QTest1TestMethodSyncMethodResponse());
 	}
-	Q_INVOKABLE QTest1TestMethodWithNoResponseMethodRequest* createTest1TestMethodWithNoResponseMethodRequest()
+	Q_INVOKABLE QVariant createTest1TestMethodWithNoResponseMethodRequest()
 	{
-		return new QTest1TestMethodWithNoResponseMethodRequest();
+		return QVariant::fromValue(new QTest1TestMethodWithNoResponseMethodRequest());
 	}
-	Q_INVOKABLE QTest1TestMethodWithNoResponseMethodResponse* createTest1TestMethodWithNoResponseMethodResponse()
+	Q_INVOKABLE QVariant createTest1TestMethodWithNoResponseMethodResponse()
 	{
-		return new QTest1TestMethodWithNoResponseMethodResponse();
+		return QVariant::fromValue(new QTest1TestMethodWithNoResponseMethodResponse());
 	}
-	Q_INVOKABLE QTest1TestMethodNoRequestMethodRequest* createTest1TestMethodNoRequestMethodRequest()
+	Q_INVOKABLE QVariant createTest1TestMethodNoRequestMethodRequest()
 	{
-		return new QTest1TestMethodNoRequestMethodRequest();
+		return QVariant::fromValue(new QTest1TestMethodNoRequestMethodRequest());
 	}
-	Q_INVOKABLE QTest1TestMethodNoRequestMethodResponse* createTest1TestMethodNoRequestMethodResponse()
+	Q_INVOKABLE QVariant createTest1TestMethodNoRequestMethodResponse()
 	{
-		return new QTest1TestMethodNoRequestMethodResponse();
+		return QVariant::fromValue(new QTest1TestMethodNoRequestMethodResponse());
 	}
 };
 }

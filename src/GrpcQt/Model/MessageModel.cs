@@ -54,6 +54,7 @@ namespace GrpcQt.Model
             using (writer.Indent())
             {
                 writer.WriteLine($"{CppTypeName}();");
+                writer.WriteLine($"{CppTypeName}(QSharedPointer<{ProtobufTypeNameFullyQualified}> message);");
                 writer.WriteLine($"~{CppTypeName}();");
             }
         }
@@ -61,6 +62,9 @@ namespace GrpcQt.Model
         public void WriteCtorImplementation(CodeWriter writer)
         {
             writer.WriteLine($"{CppTypeName}::{CppTypeName}() : _message(new {ProtobufTypeNameFullyQualified}())");
+            writer.WriteLine("{");
+            writer.WriteLine("}");
+            writer.WriteLine($"{CppTypeName}::{CppTypeName}(QSharedPointer<{ProtobufTypeNameFullyQualified}> message) : _message(message)");
             writer.WriteLine("{");
             writer.WriteLine("}");
             writer.WriteLine($"{CppTypeName}::~{CppTypeName}()");

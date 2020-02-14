@@ -49,6 +49,7 @@ namespace GrpcQt
                     header.WriteLine($"#ifndef {fileModel.HeaderPragmaName}_CREATOR");
                     header.WriteLine($"#define {fileModel.HeaderPragmaName}_CREATOR");
                     header.WriteLine("#include <QObject>");
+                    header.WriteLine("#include <QVariant>");
                     header.WriteLine($"#include \"{fileModel.IncludeFile}\"");
 
                     foreach (var nameSpace in fileModel.NamespaceComponents)
@@ -66,9 +67,9 @@ namespace GrpcQt
                         header.WriteLine("}");
                         foreach (var message in fileModel.Messages)
                         {
-                            header.WriteLine($"Q_INVOKABLE {message.CppTypeName}* create{message.ProtobufTypeName}()");
+                            header.WriteLine($"Q_INVOKABLE QVariant create{message.ProtobufTypeName}()");
                             header.WriteLine("{");
-                            header.WriteLineIndented($"return new {message.CppTypeName}();");
+                            header.WriteLineIndented($"return QVariant::fromValue(new {message.CppTypeName}());");
                             header.WriteLine("}");
                         }
                     }
@@ -135,7 +136,20 @@ namespace GrpcQt
             header.WriteLine("#include <QSharedPointer>");
 
             impl.WriteLine($"#include \"{fileModel.IncludeFile}\"");
-            header.WriteLine($"#include \"{fileModel.ProtoIncludeFile}\"");
+
+            var includes = new List<string>();
+            includes.Add(fileModel.ProtoIncludeFile);
+            includes.AddRange(fileModel.Messages.SelectMany(x => x.Properties)
+                .Where(x => x.ReferencedMessageModel != null)
+                .Select(x => x.ReferencedMessageModel)
+                .Select(x => x.FileModel.IncludeFile)
+                // Don't allow self-referencing types to double include it's own header file.
+                .Where(x => x != fileModel.IncludeFile));
+            
+            foreach (var include in includes.Distinct())
+            {
+                header.WriteLine($"#include \"{include}\"");
+            }
             
             foreach (var nameSpace in fileModel.NamespaceComponents)
             {
@@ -145,6 +159,12 @@ namespace GrpcQt
             if (!string.IsNullOrEmpty(fileModel.CppNamespace))
             {
                 impl.WriteLine($"using namespace {fileModel.CppNamespace};");
+            }
+            
+            // Forward declare all the classes.
+            foreach (var messageModel in fileModel.Messages)
+            {
+                header.WriteLine($"class {messageModel.CppTypeName};");
             }
             
             foreach (var messageModel in fileModel.Messages)
@@ -169,7 +189,15 @@ namespace GrpcQt
                     property.WriteHeaderDeclaration(header);
                     property.WriteImplementation(impl);
                 }
-                
+
+                using (header.Indent())
+                {
+                    header.WriteLine($"{messageModel.ProtobufTypeNameFullyQualified}* getInnerMessage()");
+                    header.WriteLine("{");
+                    header.WriteLineIndented("return _message.data();");
+                    header.WriteLine("}");
+                }
+
                 header.WriteLine("private:");
                 using (header.Indent())
                 {

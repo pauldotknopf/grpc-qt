@@ -1,6 +1,7 @@
 #ifndef GOOGLE_PROTOBUF_WRAPPERSPROTO_H_CREATOR
 #define GOOGLE_PROTOBUF_WRAPPERSPROTO_H_CREATOR
 #include <QObject>
+#include <QVariant>
 #include "google/protobuf/wrappers-qt.pb.h"
 namespace google {
 namespace protobuf {
@@ -10,41 +11,41 @@ public:
 	QGoogleProtobufWrappersCreator(QObject* parent = nullptr) : QObject(parent)
 	{
 	}
-	Q_INVOKABLE QDoubleValue* createDoubleValue()
+	Q_INVOKABLE QVariant createDoubleValue()
 	{
-		return new QDoubleValue();
+		return QVariant::fromValue(new QDoubleValue());
 	}
-	Q_INVOKABLE QFloatValue* createFloatValue()
+	Q_INVOKABLE QVariant createFloatValue()
 	{
-		return new QFloatValue();
+		return QVariant::fromValue(new QFloatValue());
 	}
-	Q_INVOKABLE QInt64Value* createInt64Value()
+	Q_INVOKABLE QVariant createInt64Value()
 	{
-		return new QInt64Value();
+		return QVariant::fromValue(new QInt64Value());
 	}
-	Q_INVOKABLE QUInt64Value* createUInt64Value()
+	Q_INVOKABLE QVariant createUInt64Value()
 	{
-		return new QUInt64Value();
+		return QVariant::fromValue(new QUInt64Value());
 	}
-	Q_INVOKABLE QInt32Value* createInt32Value()
+	Q_INVOKABLE QVariant createInt32Value()
 	{
-		return new QInt32Value();
+		return QVariant::fromValue(new QInt32Value());
 	}
-	Q_INVOKABLE QUInt32Value* createUInt32Value()
+	Q_INVOKABLE QVariant createUInt32Value()
 	{
-		return new QUInt32Value();
+		return QVariant::fromValue(new QUInt32Value());
 	}
-	Q_INVOKABLE QBoolValue* createBoolValue()
+	Q_INVOKABLE QVariant createBoolValue()
 	{
-		return new QBoolValue();
+		return QVariant::fromValue(new QBoolValue());
 	}
-	Q_INVOKABLE QStringValue* createStringValue()
+	Q_INVOKABLE QVariant createStringValue()
 	{
-		return new QStringValue();
+		return QVariant::fromValue(new QStringValue());
 	}
-	Q_INVOKABLE QBytesValue* createBytesValue()
+	Q_INVOKABLE QVariant createBytesValue()
 	{
-		return new QBytesValue();
+		return QVariant::fromValue(new QBytesValue());
 	}
 };
 }

@@ -1,6 +1,7 @@
 #ifndef GOOGLE_PROTOBUF_DESCRIPTORPROTO_H_CREATOR
 #define GOOGLE_PROTOBUF_DESCRIPTORPROTO_H_CREATOR
 #include <QObject>
+#include <QVariant>
 #include "google/protobuf/descriptor-qt.pb.h"
 namespace google {
 namespace protobuf {
@@ -10,89 +11,89 @@ public:
 	QGoogleProtobufDescriptorCreator(QObject* parent = nullptr) : QObject(parent)
 	{
 	}
-	Q_INVOKABLE QFileDescriptorSet* createFileDescriptorSet()
+	Q_INVOKABLE QVariant createFileDescriptorSet()
 	{
-		return new QFileDescriptorSet();
+		return QVariant::fromValue(new QFileDescriptorSet());
 	}
-	Q_INVOKABLE QFileDescriptorProto* createFileDescriptorProto()
+	Q_INVOKABLE QVariant createFileDescriptorProto()
 	{
-		return new QFileDescriptorProto();
+		return QVariant::fromValue(new QFileDescriptorProto());
 	}
-	Q_INVOKABLE QDescriptorProto* createDescriptorProto()
+	Q_INVOKABLE QVariant createDescriptorProto()
 	{
-		return new QDescriptorProto();
+		return QVariant::fromValue(new QDescriptorProto());
 	}
-	Q_INVOKABLE QExtensionRangeOptions* createExtensionRangeOptions()
+	Q_INVOKABLE QVariant createExtensionRangeOptions()
 	{
-		return new QExtensionRangeOptions();
+		return QVariant::fromValue(new QExtensionRangeOptions());
 	}
-	Q_INVOKABLE QFieldDescriptorProto* createFieldDescriptorProto()
+	Q_INVOKABLE QVariant createFieldDescriptorProto()
 	{
-		return new QFieldDescriptorProto();
+		return QVariant::fromValue(new QFieldDescriptorProto());
 	}
-	Q_INVOKABLE QOneofDescriptorProto* createOneofDescriptorProto()
+	Q_INVOKABLE QVariant createOneofDescriptorProto()
 	{
-		return new QOneofDescriptorProto();
+		return QVariant::fromValue(new QOneofDescriptorProto());
 	}
-	Q_INVOKABLE QEnumDescriptorProto* createEnumDescriptorProto()
+	Q_INVOKABLE QVariant createEnumDescriptorProto()
 	{
-		return new QEnumDescriptorProto();
+		return QVariant::fromValue(new QEnumDescriptorProto());
 	}
-	Q_INVOKABLE QEnumValueDescriptorProto* createEnumValueDescriptorProto()
+	Q_INVOKABLE QVariant createEnumValueDescriptorProto()
 	{
-		return new QEnumValueDescriptorProto();
+		return QVariant::fromValue(new QEnumValueDescriptorProto());
 	}
-	Q_INVOKABLE QServiceDescriptorProto* createServiceDescriptorProto()
+	Q_INVOKABLE QVariant createServiceDescriptorProto()
 	{
-		return new QServiceDescriptorProto();
+		return QVariant::fromValue(new QServiceDescriptorProto());
 	}
-	Q_INVOKABLE QMethodDescriptorProto* createMethodDescriptorProto()
+	Q_INVOKABLE QVariant createMethodDescriptorProto()
 	{
-		return new QMethodDescriptorProto();
+		return QVariant::fromValue(new QMethodDescriptorProto());
 	}
-	Q_INVOKABLE QFileOptions* createFileOptions()
+	Q_INVOKABLE QVariant createFileOptions()
 	{
-		return new QFileOptions();
+		return QVariant::fromValue(new QFileOptions());
 	}
-	Q_INVOKABLE QMessageOptions* createMessageOptions()
+	Q_INVOKABLE QVariant createMessageOptions()
 	{
-		return new QMessageOptions();
+		return QVariant::fromValue(new QMessageOptions());
 	}
-	Q_INVOKABLE QFieldOptions* createFieldOptions()
+	Q_INVOKABLE QVariant createFieldOptions()
 	{
-		return new QFieldOptions();
+		return QVariant::fromValue(new QFieldOptions());
 	}
-	Q_INVOKABLE QOneofOptions* createOneofOptions()
+	Q_INVOKABLE QVariant createOneofOptions()
 	{
-		return new QOneofOptions();
+		return QVariant::fromValue(new QOneofOptions());
 	}
-	Q_INVOKABLE QEnumOptions* createEnumOptions()
+	Q_INVOKABLE QVariant createEnumOptions()
 	{
-		return new QEnumOptions();
+		return QVariant::fromValue(new QEnumOptions());
 	}
-	Q_INVOKABLE QEnumValueOptions* createEnumValueOptions()
+	Q_INVOKABLE QVariant createEnumValueOptions()
 	{
-		return new QEnumValueOptions();
+		return QVariant::fromValue(new QEnumValueOptions());
 	}
-	Q_INVOKABLE QServiceOptions* createServiceOptions()
+	Q_INVOKABLE QVariant createServiceOptions()
 	{
-		return new QServiceOptions();
+		return QVariant::fromValue(new QServiceOptions());
 	}
-	Q_INVOKABLE QMethodOptions* createMethodOptions()
+	Q_INVOKABLE QVariant createMethodOptions()
 	{
-		return new QMethodOptions();
+		return QVariant::fromValue(new QMethodOptions());
 	}
-	Q_INVOKABLE QUninterpretedOption* createUninterpretedOption()
+	Q_INVOKABLE QVariant createUninterpretedOption()
 	{
-		return new QUninterpretedOption();
+		return QVariant::fromValue(new QUninterpretedOption());
 	}
-	Q_INVOKABLE QSourceCodeInfo* createSourceCodeInfo()
+	Q_INVOKABLE QVariant createSourceCodeInfo()
 	{
-		return new QSourceCodeInfo();
+		return QVariant::fromValue(new QSourceCodeInfo());
 	}
-	Q_INVOKABLE QGeneratedCodeInfo* createGeneratedCodeInfo()
+	Q_INVOKABLE QVariant createGeneratedCodeInfo()
 	{
-		return new QGeneratedCodeInfo();
+		return QVariant::fromValue(new QGeneratedCodeInfo());
 	}
 };
 }

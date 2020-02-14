@@ -51,6 +51,7 @@ namespace GrpcQt.Model
                         {
                             case FieldDescriptorProto.Types.Type.Bool:
                             case FieldDescriptorProto.Types.Type.String:
+                            case FieldDescriptorProto.Types.Type.Message:
                                 break;
                             default:
                                 continue;
@@ -77,82 +78,6 @@ namespace GrpcQt.Model
                     }
                 }
             }
-            
-            // if (!string.IsNullOrEmpty(fileDescriptorProto.Package))
-            // {
-            //     result.Namespace = fileDescriptorProto.Package.Replace(".", "::");
-            //     result.NamespaceComponents.AddRange(fileDescriptorProto.Package.Split("."));
-            // }
-            // result.CreatorTypeName = $"Q{result.FileNameBase.Replace("/", " ").ApplyCase(LetterCasing.Title).Replace(" ", "")}Creator";
-            // result.IncludeFile = result.FileNameBase + "-qt.pb.h";
-            // result.ImplFile = result.FileNameBase + "-qt.pb.cpp";
-            // result.ProtoIncludeFile = result.FileNameBase + ".pb.h";
-            //
-            // foreach (var messageDescriptorProto in fileDescriptorProto.MessageType)
-            // {
-            //     var messageModel = new MessageModel(messageDescriptorProto, result);
-            //     result.Messages.Add(messageModel);
-            //
-            //     // if (!string.IsNullOrEmpty(fileDescriptorProto.Package))
-            //     // {
-            //     //     messageModel.Qualifier = $"{fileDescriptorProto.Package}.{messageDescriptorProto.Name}";
-            //     // }
-            //     // else
-            //     // {
-            //     //     messageModel.Qualifier = $"{messageDescriptorProto.Name}";
-            //     // }
-            //     //
-            //     // messageModel.TypeName = $"Q{messageDescriptorProto.Name}";
-            //     //
-            //     // if (string.IsNullOrEmpty(fileDescriptorProto.Package))
-            //     // {
-            //     //     messageModel.ProtobufTypeName = messageDescriptorProto.Name;
-            //     // }
-            //     // else
-            //     // {
-            //     //     messageModel.ProtobufTypeName = fileDescriptorProto.Package.Replace(".", "::") + "::" + messageDescriptorProto.Name;
-            //     // }
-            //     //
-            //     // foreach (var field in messageDescriptorProto.Field)
-            //     // {
-            //     //     if (field.Label.HasFlag(FieldDescriptorProto.Types.Label.Repeated))
-            //     //     {
-            //     //         continue;
-            //     //     }
-            //     //
-            //     //     if (field.Options != null && field.Options.Deprecated)
-            //     //     {
-            //     //         continue;
-            //     //     }
-            //     //
-            //     //     var name = field.Name.Replace("_", " ").Camelize();
-            //     //     var getter = $"get{field.Name.Replace("_", " ").Pascalize()}";
-            //     //     var setter = $"set{field.Name.Replace("_", " ").Pascalize()}";
-            //     //
-            //     //     var property = new PropertyModel
-            //     //     {
-            //     //         Message = messageModel,
-            //     //         Name = name,
-            //     //         FieldDescriptorProto = field,
-            //     //         Getter = getter,
-            //     //         Setter = setter
-            //     //     };
-            //     //     
-            //     //     switch (field.Type)
-            //     //     {
-            //     //         case FieldDescriptorProto.Types.Type.String:
-            //     //         case FieldDescriptorProto.Types.Type.Bool:
-            //     //             messageModel.Properties.Add(property);
-            //     //             break;
-            //     //         case FieldDescriptorProto.Types.Type.Message:
-            //     //             property.TypeName = field.TypeName;
-            //     //             messageModel.Properties.Add(property);
-            //     //             break;
-            //     //     }
-            //     // }
-            // }
-            //
-            
             
             return result;
         }

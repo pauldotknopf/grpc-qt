@@ -1,6 +1,7 @@
 #ifndef GOOGLE_PROTOBUF_ANYPROTO_H_CREATOR
 #define GOOGLE_PROTOBUF_ANYPROTO_H_CREATOR
 #include <QObject>
+#include <QVariant>
 #include "google/protobuf/any-qt.pb.h"
 namespace google {
 namespace protobuf {
@@ -10,9 +11,9 @@ public:
 	QGoogleProtobufAnyCreator(QObject* parent = nullptr) : QObject(parent)
 	{
 	}
-	Q_INVOKABLE QAny* createAny()
+	Q_INVOKABLE QVariant createAny()
 	{
-		return new QAny();
+		return QVariant::fromValue(new QAny());
 	}
 };
 }

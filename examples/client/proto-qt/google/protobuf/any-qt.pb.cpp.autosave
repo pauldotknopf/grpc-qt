@@ -1,13 +1,12 @@
 #include "google/protobuf/any-qt.pb.h"
+#include <QDateTime>
 using namespace google::protobuf;
 QAny::QAny() : _message(new google::protobuf::Any())
 {
 }
-QAny::QAny(QSharedPointer<google::protobuf::Any> message) : _message(message)
-{
-}
 QAny::~QAny()
 {
+    new QDateTime()
 }
 void QAny::setTypeUrl(QString val)
 {
