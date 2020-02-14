@@ -4,9 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Google.Protobuf.Compiler;
-using Google.Protobuf.Reflection;
 using GrpcQt.Model;
-using Humanizer;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace GrpcQt
@@ -17,21 +16,17 @@ namespace GrpcQt
         {
             var response = new CodeGeneratorResponse();
 
-            var fileModels = new List<FileModel>();
-            foreach (var fileDescriptorProto in request.ProtoFile)
+            var fileModels = ModelBuilder.BuildModel(request);
+            foreach (var fileModel in fileModels)
             {
-                FileModel fileModel = null;
                 var implCode = "";
                 var headerCode = BuildContent(headerWriter =>
                 {
                     implCode = BuildContent(implWriter =>
                     {
-                        fileModel = ModelBuilder.BuildModel(fileDescriptorProto);
                         GenerateFile(fileModel, headerWriter, implWriter);
                     });
                 });
-                
-                fileModels.Add(fileModel);
                 
                 response.File.Add(new CodeGeneratorResponse.Types.File
                 {
@@ -61,19 +56,19 @@ namespace GrpcQt
                         header.WriteLine($"namespace {nameSpace} {{");
                     }
                     
-                    header.WriteLine($"class {fileModel.CreatorTypeName} : public QObject {{");
+                    header.WriteLine($"class {fileModel.CppCreatorTypeName} : public QObject {{");
                     header.WriteLineIndented("Q_OBJECT");
                     header.WriteLine("public:");
                     using (header.Indent())
                     {
-                        header.WriteLine($"{fileModel.CreatorTypeName}(QObject* parent = nullptr) : QObject(parent)");
+                        header.WriteLine($"{fileModel.CppCreatorTypeName}(QObject* parent = nullptr) : QObject(parent)");
                         header.WriteLine("{");
                         header.WriteLine("}");
                         foreach (var message in fileModel.Messages)
                         {
-                            header.WriteLine($"Q_INVOKABLE {message.TypeName}* create{message.TypeName.Substring(1)}()");
+                            header.WriteLine($"Q_INVOKABLE {message.CppTypeName}* create{message.ProtobufTypeName}()");
                             header.WriteLine("{");
-                            header.WriteLineIndented($"return new {message.TypeName}();");
+                            header.WriteLineIndented($"return new {message.CppTypeName}();");
                             header.WriteLine("}");
                         }
                     }
@@ -147,14 +142,14 @@ namespace GrpcQt
                 header.WriteLine($"namespace {nameSpace} {{");
             }
 
-            if (!string.IsNullOrEmpty(fileModel.Namespace))
+            if (!string.IsNullOrEmpty(fileModel.CppNamespace))
             {
-                impl.WriteLine($"using namespace {fileModel.Namespace};");
+                impl.WriteLine($"using namespace {fileModel.CppNamespace};");
             }
             
             foreach (var messageModel in fileModel.Messages)
             {
-                header.WriteLine($"class {messageModel.TypeName} : public QObject");
+                header.WriteLine($"class {messageModel.CppTypeName} : public QObject");
                 header.WriteLine("{");
                 using (header.Indent())
                 {
@@ -178,7 +173,7 @@ namespace GrpcQt
                 header.WriteLine("private:");
                 using (header.Indent())
                 {
-                    header.WriteLine($"QSharedPointer<{messageModel.ProtobufTypeName}> _message;");
+                    header.WriteLine($"QSharedPointer<{messageModel.ProtobufTypeNameFullyQualified}> _message;");
                 }
                 
                 header.WriteLine("};");

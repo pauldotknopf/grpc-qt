@@ -18,7 +18,7 @@ namespace GrpcQt
             //     Thread.Sleep(1000);
             // }
             // Debugger.Break();
-            
+            //
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console(standardErrorFromLevel: LogEventLevel.Verbose)
                 .CreateLogger();
