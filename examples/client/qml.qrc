@@ -2,5 +2,8 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
+        <file>proto-qml/types.pb.js</file>
+        <file>modules/Protobuf/qmldir</file>
+        <file alias="modules/Protobuf/message.js">third_party/protobuf-qml/lib/protobuf/imports/message.js</file>
     </qresource>
 </RCC>

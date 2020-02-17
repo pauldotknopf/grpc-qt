@@ -15,7 +15,7 @@
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 extern PROTOBUF_INTERNAL_EXPORT_types_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TestMessageRequest_types_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_types_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TestMessageResponse_types_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_types_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_TestMessageResponse_types_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_google_2fprotobuf_2fwrappers_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_StringValue_google_2fprotobuf_2fwrappers_2eproto;
 namespace Tests {
 class Test1ListenEventStreamDefaultTypeInternal {

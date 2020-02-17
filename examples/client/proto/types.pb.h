@@ -326,6 +326,7 @@ class TestMessageResponse :
 
   enum : int {
     kValue2FieldNumber = 2,
+    kSdfFieldNumber = 3,
     kValue1FieldNumber = 1,
   };
   // string value2 = 2;
@@ -344,6 +345,21 @@ class TestMessageResponse :
   std::string* _internal_mutable_value2();
   public:
 
+  // .custom.types.TestMessageRequest sdf = 3;
+  bool has_sdf() const;
+  private:
+  bool _internal_has_sdf() const;
+  public:
+  void clear_sdf();
+  const ::custom::types::TestMessageRequest& sdf() const;
+  ::custom::types::TestMessageRequest* release_sdf();
+  ::custom::types::TestMessageRequest* mutable_sdf();
+  void set_allocated_sdf(::custom::types::TestMessageRequest* sdf);
+  private:
+  const ::custom::types::TestMessageRequest& _internal_sdf() const;
+  ::custom::types::TestMessageRequest* _internal_mutable_sdf();
+  public:
+
   // uint64 value1 = 1;
   void clear_value1();
   ::PROTOBUF_NAMESPACE_ID::uint64 value1() const;
@@ -359,6 +375,7 @@ class TestMessageResponse :
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr value2_;
+  ::custom::types::TestMessageRequest* sdf_;
   ::PROTOBUF_NAMESPACE_ID::uint64 value1_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_types_2eproto;
@@ -536,6 +553,66 @@ inline void TestMessageResponse::set_allocated_value2(std::string* value2) {
   }
   value2_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value2);
   // @@protoc_insertion_point(field_set_allocated:custom.types.TestMessageResponse.value2)
+}
+
+// .custom.types.TestMessageRequest sdf = 3;
+inline bool TestMessageResponse::_internal_has_sdf() const {
+  return this != internal_default_instance() && sdf_ != nullptr;
+}
+inline bool TestMessageResponse::has_sdf() const {
+  return _internal_has_sdf();
+}
+inline void TestMessageResponse::clear_sdf() {
+  if (GetArenaNoVirtual() == nullptr && sdf_ != nullptr) {
+    delete sdf_;
+  }
+  sdf_ = nullptr;
+}
+inline const ::custom::types::TestMessageRequest& TestMessageResponse::_internal_sdf() const {
+  const ::custom::types::TestMessageRequest* p = sdf_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::custom::types::TestMessageRequest*>(
+      &::custom::types::_TestMessageRequest_default_instance_);
+}
+inline const ::custom::types::TestMessageRequest& TestMessageResponse::sdf() const {
+  // @@protoc_insertion_point(field_get:custom.types.TestMessageResponse.sdf)
+  return _internal_sdf();
+}
+inline ::custom::types::TestMessageRequest* TestMessageResponse::release_sdf() {
+  // @@protoc_insertion_point(field_release:custom.types.TestMessageResponse.sdf)
+  
+  ::custom::types::TestMessageRequest* temp = sdf_;
+  sdf_ = nullptr;
+  return temp;
+}
+inline ::custom::types::TestMessageRequest* TestMessageResponse::_internal_mutable_sdf() {
+  
+  if (sdf_ == nullptr) {
+    auto* p = CreateMaybeMessage<::custom::types::TestMessageRequest>(GetArenaNoVirtual());
+    sdf_ = p;
+  }
+  return sdf_;
+}
+inline ::custom::types::TestMessageRequest* TestMessageResponse::mutable_sdf() {
+  // @@protoc_insertion_point(field_mutable:custom.types.TestMessageResponse.sdf)
+  return _internal_mutable_sdf();
+}
+inline void TestMessageResponse::set_allocated_sdf(::custom::types::TestMessageRequest* sdf) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete sdf_;
+  }
+  if (sdf) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      sdf = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, sdf, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  sdf_ = sdf;
+  // @@protoc_insertion_point(field_set_allocated:custom.types.TestMessageResponse.sdf)
 }
 
 #ifdef __GNUC__

@@ -14,6 +14,7 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
+extern PROTOBUF_INTERNAL_EXPORT_types_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TestMessageRequest_types_2eproto;
 namespace custom {
 namespace types {
 class TestMessageRequestDefaultTypeInternal {
@@ -51,8 +52,9 @@ static void InitDefaultsscc_info_TestMessageResponse_types_2eproto() {
   ::custom::types::TestMessageResponse::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TestMessageResponse_types_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_TestMessageResponse_types_2eproto}, {}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_TestMessageResponse_types_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_TestMessageResponse_types_2eproto}, {
+      &scc_info_TestMessageRequest_types_2eproto.base,}};
 
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_types_2eproto[2];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_types_2eproto = nullptr;
@@ -73,6 +75,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_types_2eproto::offsets[] PROTO
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::custom::types::TestMessageResponse, value1_),
   PROTOBUF_FIELD_OFFSET(::custom::types::TestMessageResponse, value2_),
+  PROTOBUF_FIELD_OFFSET(::custom::types::TestMessageResponse, sdf_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::custom::types::TestMessageRequest)},
@@ -87,8 +90,9 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 const char descriptor_table_protodef_types_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\013types.proto\022\014custom.types\"4\n\022TestMessa"
   "geRequest\022\016\n\006value1\030\002 \001(\004\022\016\n\006value2\030\003 \001("
-  "\t\"5\n\023TestMessageResponse\022\016\n\006value1\030\001 \001(\004"
-  "\022\016\n\006value2\030\002 \001(\tb\006proto3"
+  "\t\"d\n\023TestMessageResponse\022\016\n\006value1\030\001 \001(\004"
+  "\022\016\n\006value2\030\002 \001(\t\022-\n\003sdf\030\003 \001(\0132 .custom.t"
+  "ypes.TestMessageRequestb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_types_2eproto_deps[1] = {
 };
@@ -99,7 +103,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_typ
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_types_2eproto_once;
 static bool descriptor_table_types_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_types_2eproto = {
-  &descriptor_table_types_2eproto_initialized, descriptor_table_protodef_types_2eproto, "types.proto", 144,
+  &descriptor_table_types_2eproto_initialized, descriptor_table_protodef_types_2eproto, "types.proto", 191,
   &descriptor_table_types_2eproto_once, descriptor_table_types_2eproto_sccs, descriptor_table_types_2eproto_deps, 2, 0,
   schemas, file_default_instances, TableStruct_types_2eproto::offsets,
   file_level_metadata_types_2eproto, 2, file_level_enum_descriptors_types_2eproto, file_level_service_descriptors_types_2eproto,
@@ -339,11 +343,18 @@ void TestMessageRequest::InternalSwap(TestMessageRequest* other) {
 // ===================================================================
 
 void TestMessageResponse::InitAsDefaultInstance() {
+  ::custom::types::_TestMessageResponse_default_instance_._instance.get_mutable()->sdf_ = const_cast< ::custom::types::TestMessageRequest*>(
+      ::custom::types::TestMessageRequest::internal_default_instance());
 }
 class TestMessageResponse::_Internal {
  public:
+  static const ::custom::types::TestMessageRequest& sdf(const TestMessageResponse* msg);
 };
 
+const ::custom::types::TestMessageRequest&
+TestMessageResponse::_Internal::sdf(const TestMessageResponse* msg) {
+  return *msg->sdf_;
+}
 TestMessageResponse::TestMessageResponse()
   : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
@@ -357,6 +368,11 @@ TestMessageResponse::TestMessageResponse(const TestMessageResponse& from)
   if (!from._internal_value2().empty()) {
     value2_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.value2_);
   }
+  if (from._internal_has_sdf()) {
+    sdf_ = new ::custom::types::TestMessageRequest(*from.sdf_);
+  } else {
+    sdf_ = nullptr;
+  }
   value1_ = from.value1_;
   // @@protoc_insertion_point(copy_constructor:custom.types.TestMessageResponse)
 }
@@ -364,7 +380,9 @@ TestMessageResponse::TestMessageResponse(const TestMessageResponse& from)
 void TestMessageResponse::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_TestMessageResponse_types_2eproto.base);
   value2_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  value1_ = PROTOBUF_ULONGLONG(0);
+  ::memset(&sdf_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&value1_) -
+      reinterpret_cast<char*>(&sdf_)) + sizeof(value1_));
 }
 
 TestMessageResponse::~TestMessageResponse() {
@@ -374,6 +392,7 @@ TestMessageResponse::~TestMessageResponse() {
 
 void TestMessageResponse::SharedDtor() {
   value2_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete sdf_;
 }
 
 void TestMessageResponse::SetCachedSize(int size) const {
@@ -392,6 +411,10 @@ void TestMessageResponse::Clear() {
   (void) cached_has_bits;
 
   value2_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == nullptr && sdf_ != nullptr) {
+    delete sdf_;
+  }
+  sdf_ = nullptr;
   value1_ = PROTOBUF_ULONGLONG(0);
   _internal_metadata_.Clear();
 }
@@ -416,6 +439,13 @@ const char* TestMessageResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAME
           auto str = _internal_mutable_value2();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "custom.types.TestMessageResponse.value2"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .custom.types.TestMessageRequest sdf = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr = ctx->ParseMessage(_internal_mutable_sdf(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -461,6 +491,14 @@ failure:
         2, this->_internal_value2(), target);
   }
 
+  // .custom.types.TestMessageRequest sdf = 3;
+  if (this->has_sdf()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        3, _Internal::sdf(this), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target, stream);
@@ -482,6 +520,13 @@ size_t TestMessageResponse::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_value2());
+  }
+
+  // .custom.types.TestMessageRequest sdf = 3;
+  if (this->has_sdf()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *sdf_);
   }
 
   // uint64 value1 = 1;
@@ -526,6 +571,9 @@ void TestMessageResponse::MergeFrom(const TestMessageResponse& from) {
 
     value2_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.value2_);
   }
+  if (from.has_sdf()) {
+    _internal_mutable_sdf()->::custom::types::TestMessageRequest::MergeFrom(from._internal_sdf());
+  }
   if (from.value1() != 0) {
     _internal_set_value1(from._internal_value1());
   }
@@ -554,6 +602,7 @@ void TestMessageResponse::InternalSwap(TestMessageResponse* other) {
   _internal_metadata_.Swap(&other->_internal_metadata_);
   value2_.Swap(&other->value2_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
+  swap(sdf_, other->sdf_);
   swap(value1_, other->value1_);
 }
 

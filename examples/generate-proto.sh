@@ -7,6 +7,8 @@ echo "Generating types.proto..."
 protoc --cpp_out=./client/proto \
     --grpc_out=./client/proto \
     --qt_out=./client/proto-qt \
+    --qml_out=./client/proto-qml \
+    --js_out=./client/proto-js \
     --plugin=protoc-gen-grpc=`which grpc_cpp_plugin` \
     -I./proto \
     types.proto

@@ -34,3 +34,19 @@ QString QTestMessageResponse::getValue2()
 {
 	return QString::fromStdString(_message->value2());
 }
+void QTestMessageResponse::fillSdf()
+{
+	_message->set_allocated_sdf(new custom::types::TestMessageRequest());
+}
+void QTestMessageResponse::setSdf(custom::types::QTestMessageRequest* val)
+{
+	if (val) { _message->set_allocated_sdf(val->getInnerMessage()); } else { _message->clear_sdf(); }
+}
+custom::types::QTestMessageRequest* QTestMessageResponse::getSdf()
+{
+	if(!_message->has_sdf()) { return nullptr; }
+	auto val = _message->sdf();
+	auto result = new custom::types::TestMessageRequest();
+	result->CopyFrom(val);
+	return new custom::types::QTestMessageRequest(QSharedPointer<custom::types::TestMessageRequest>(result));
+}

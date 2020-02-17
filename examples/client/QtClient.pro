@@ -17,6 +17,8 @@ PKGCONFIG += grpc++ protobuf
 
 INCLUDEPATH += $$PWD/proto
 
+QML_IMPORT_PATH += $$PWD/modules/
+
 SOURCES += \
         main.cpp \
         proto/types.pb.cc \
@@ -31,6 +33,7 @@ HEADERS += \
         qtest1.h
 
 include(proto-qt/qt.pri)
+include(protobuf-qml.pri)
 
 RESOURCES += qml.qrc
 

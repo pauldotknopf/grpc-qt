@@ -1,0 +1,3 @@
+[submodule "examples/client/third_party/protobuf-qml"]
+	path = examples/client/third_party/protobuf-qml
+	url = https://github.com/nsuke/protobuf-qml.git

@@ -34,6 +34,9 @@ public:
 	~QTestMessageResponse();
 	void setValue2(QString val);
 	QString getValue2();
+	Q_INVOKABLE void fillSdf();
+	Q_INVOKABLE void setSdf(custom::types::QTestMessageRequest* val);
+	Q_INVOKABLE custom::types::QTestMessageRequest* getSdf();
 	custom::types::TestMessageResponse* getInnerMessage()
 	{
 		return _message.data();

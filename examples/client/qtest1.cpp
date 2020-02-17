@@ -2,6 +2,8 @@
 #include "proto/gen.grpc.pb.h"
 #include <grpc++/grpc++.h>
 #include <QDebug>
+#include "protobuf/qml/conversions.h"
+#include "proto/types.pb.h"
 
 class QTest1Private
 {
@@ -55,6 +57,29 @@ QTest1::QTest1() : d_ptr(new QTest1Private())
 QTest1::~QTest1()
 {
     d_ptr->releaseObject();
+}
+
+void QTest1::test(QJSValue val)
+{
+    // Prepare converter that uses QML engine associated with this QJSValue.
+    auto convert = protobuf::qml::JSValueConverter::fromQJSValue(val);
+    if (!convert) {
+      qWarning() << "Failed to initialize JS value converter.";
+      return;
+    }
+
+
+//    // Convert to C++ protobuf message.
+    custom::types::TestMessageRequest foo;
+    if (!convert->fromJSValue(foo, val)) {
+      qWarning() << "Failed to convert to C++ Protobuf message.";
+      return;
+    }
+
+    std::cout << foo.value1() << std::endl;
+
+//    // Do whatever
+//    auto bar = doSomethingInternal(foo);
 }
 
 QString QTest1::getPropString()

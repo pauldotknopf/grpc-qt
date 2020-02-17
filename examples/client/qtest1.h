@@ -2,6 +2,7 @@
 #define QTEST1_H
 
 #include <QObject>
+#include <QJSValue>
 
 #include <QScopedPointer>
 class QTest1Private;
@@ -13,6 +14,8 @@ class QTest1 : public QObject
 public:
     QTest1();
     ~QTest1();
+
+    Q_INVOKABLE void test(QJSValue val);
 
     QString getPropString();
     void setPropString(QString& val);
